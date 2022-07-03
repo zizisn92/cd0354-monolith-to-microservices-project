@@ -8,25 +8,38 @@ env:
 before_install:
   # login docker hub
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-
-jobs:
-  include:
-    # build image
-    - stage: build image
-      script: 
-      - docker-compose -f docker-compose-build.yaml build --parallel
-    # change tag name of image
-    - stage: tag image
-      script: 
-       - docker tag udagram-api-feed hungnhi92/udagram-api-feed:v1
-       - docker tag udagram-api-user hungnhi92/udagram-api-user:v1
-       - docker tag udagram-frontend:local hungnhi92/udagram-frontend:v1
-       - docker tag udagram-reverseproxy hungnhi92/udagram-reverseproxy:v1
-    # push image
-    - stage: push image
-      script: 
-        - docker push hungnhi92/udagram-api-feed:v1
-        - docker push hungnhi92/hungnhi92/udagram-api-user:v1
-        - docker push hungnhi92/udagram-frontend:v1
-        - docker push hungnhi92/udagram-reverseproxy:v1
+install:
+  # build image
+  - docker-compose -f docker-compose-build.yaml build --parallel
+  # tag image
+  - echo $(docker images)
+  - docker tag udagram-api-feed hungnhi92/udagram-api-feed:v1
+  - docker tag udagram-api-user hungnhi92/udagram-api-user:v1
+  - docker tag udagram-frontend:local hungnhi92/udagram-frontend:v1
+  - docker tag udagram-reverseproxy hungnhi92/udagram-reverseproxy:v1
+  # push image
+  - docker push hungnhi92/udagram-api-feed:v1
+  - docker push hungnhi92/hungnhi92/udagram-api-user:v1
+  - docker push hungnhi92/udagram-frontend:v1
+  - docker push hungnhi92/udagram-reverseproxy:v1
+# jobs:
+#   include:
+#     # build image
+#     - stage: build image
+#       script: 
+#        - docker-compose -f docker-compose-build.yaml build --parallel
+#     # change tag name of image
+#     - stage: tag image
+#       script: 
+#        - docker tag udagram-api-feed hungnhi92/udagram-api-feed:v1
+#        - docker tag udagram-api-user hungnhi92/udagram-api-user:v1
+#        - docker tag udagram-frontend:local hungnhi92/udagram-frontend:v1
+#        - docker tag udagram-reverseproxy hungnhi92/udagram-reverseproxy:v1
+#     # push image
+#     - stage: push image
+#       script: 
+#         - docker push hungnhi92/udagram-api-feed:v1
+#         - docker push hungnhi92/hungnhi92/udagram-api-user:v1
+#         - docker push hungnhi92/udagram-frontend:v1
+#         - docker push hungnhi92/udagram-reverseproxy:v1
 
