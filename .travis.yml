@@ -20,7 +20,7 @@ jobs:
       script: 
        - docker tag udagram-api-feed hungnhi92/udagram-api-feed:v1
        - docker tag udagram-api-user hungnhi92/udagram-api-user:v1
-       - docker tag udagram-frontend hungnhi92/udagram-frontend:v1
+       - docker tag udagram-frontend:local hungnhi92/udagram-frontend:v1
        - docker tag udagram-reverseproxy hungnhi92/udagram-reverseproxy:v1
     # push image
     - stage: push image
