@@ -1,24 +1,34 @@
-services: docker
+# services: docker
 
 
-env:
-  - DOCKER_COMPOSE_VERSION=2.6.1
+# env:
+#   - DOCKER_COMPOSE_VERSION=2.6.1
 
-before_script:
-  - echo "abcd"
+# before_script:
+#   - echo "abcd"
   
-build:
-  - docker-compose -f docker-compose-build.yaml build --parallel
+# build:
+#   - docker-compose -f docker-compose-build.yaml build --parallel
 
-tagging:
-  - docker tag udagram-api-feed hungnhi92/udagram-api-feed:v1
-  - docker tag udagram-api-user hungnhi92/udagram-api-user:v1
-  - docker tag udagram-frontend hungnhi92/udagram-frontend:v1
-  - docker tag udagram-reverseproxy hungnhi92/udagram-reverseproxy:v1
+# tagging:
+#   - docker tag udagram-api-feed hungnhi92/udagram-api-feed:v1
+#   - docker tag udagram-api-user hungnhi92/udagram-api-user:v1
+#   - docker tag udagram-frontend hungnhi92/udagram-frontend:v1
+#   - docker tag udagram-reverseproxy hungnhi92/udagram-reverseproxy:v1
 
-push:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push hungnhi92/udagram-api-feed:v1
-  - docker push hungnhi92/hungnhi92/udagram-api-user:v1
-  - docker push hungnhi92/udagram-frontend:v1
-  - docker push hungnhi92/udagram-reverseproxy:v1
+# push:
+#   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+#   - docker push hungnhi92/udagram-api-feed:v1
+#   - docker push hungnhi92/hungnhi92/udagram-api-user:v1
+#   - docker push hungnhi92/udagram-frontend:v1
+#   - docker push hungnhi92/udagram-reverseproxy:v1
+
+sudo: required language: node_js
+node_js:
+    - "stable"
+    
+services: 
+    - docker
+before_install: 
+    - docker build -t wilpat/sample-app -f Dockerfile.dev .script:     
+    - docker run -e CI=true wilpat/sample-app npm run test -- --coverage
