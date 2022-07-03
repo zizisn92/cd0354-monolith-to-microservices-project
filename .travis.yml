@@ -19,7 +19,7 @@ install:
   - docker tag udagram-reverseproxy hungnhi92/udagram-reverseproxy:v1
   # push image
   - docker push hungnhi92/udagram-api-feed:v1
-  - docker push hungnhi92/hungnhi92/udagram-api-user:v1
+  - docker push hungnhi92/udagram-api-user:v1
   - docker push hungnhi92/udagram-frontend:v1
   - docker push hungnhi92/udagram-reverseproxy:v1
 # jobs:
