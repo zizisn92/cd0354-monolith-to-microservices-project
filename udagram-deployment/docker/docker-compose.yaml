@@ -1,7 +1,7 @@
 version: "3"
 services:
   backend-feed:
-    image: hungnhi92/udagram-api-feed
+    image: hungnhi92/udagram-api-feed:latest
     #container_name: feed
     volumes:
       - $HOME/.aws:/root/.aws
@@ -16,7 +16,7 @@ services:
       JWT_SECRET: $JWT_SECRET
       URL: "http://localhost:8100"
   backend-user:
-    image: hungnhi92/udagram-api-user
+    image: hungnhi92/udagram-api-user:latest
     #container_name: user
     environment:
       POSTGRES_USERNAME: $POSTGRES_USERNAME
@@ -29,7 +29,7 @@ services:
       JWT_SECRET: $JWT_SECRET
       URL: "http://localhost:8100"
   reverseproxy:
-      image: hungnhi92/reverseproxy
+      image: hungnhi92/reverseproxy:latest
       ports:
           - 8080:8080
       restart: always
